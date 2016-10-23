@@ -80,7 +80,7 @@ public abstract class BaseDaoImpl<T,ID extends Serializable> implements BaseDao<
         sqlGenerator = new SQLGenerator<T>(currentColumnFieldNames.keySet(),tableName,pkName,seq);
 	}
 	public boolean insert(T obj) {
-		int res = sqlTemplate.insert("create",sqlGenerator.sql_create(obj, currentColumnFieldNames));
+		int res = sqlTemplate.insert("insert",sqlGenerator.sql_create(obj, currentColumnFieldNames));
 		return returnResult(res);
 	}
 	
