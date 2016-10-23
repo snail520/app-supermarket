@@ -6,5 +6,7 @@
 	 <insert id="insert">
         ${value}
      </insert>
-	
+	<insert id="insertOfBatch">
+        ${value}
+     </insert>
  </mapper>

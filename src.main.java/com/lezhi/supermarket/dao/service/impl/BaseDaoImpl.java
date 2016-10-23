@@ -113,7 +113,7 @@ public abstract class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<
                 temp = new ArrayList<T>();
             }
         }
-        sqlTemplate.insert("createOfBatch", sqlGenerator.sql_createOfBatch(temp, currentColumnFieldNames,pkVal));
+        sqlTemplate.insert("insertOfBatch", sqlGenerator.sql_createOfBatch(temp, currentColumnFieldNames,pkVal));
 	}
 
 	

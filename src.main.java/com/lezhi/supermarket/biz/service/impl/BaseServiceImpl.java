@@ -1,6 +1,7 @@
 package com.lezhi.supermarket.biz.service.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,4 +17,9 @@ public abstract class BaseServiceImpl<T,PK extends Serializable> implements Base
 	public boolean insert(T obj) throws Exception {
 		return baseDao.insert(obj);
     }
+
+	@Override
+	public void insertOfBatch(List<T> list) throws Exception {
+		baseDao.insertOfBatch(list);
+	}
 }

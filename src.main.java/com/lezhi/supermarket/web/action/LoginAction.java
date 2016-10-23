@@ -1,6 +1,8 @@
 package com.lezhi.supermarket.web.action;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,18 +61,36 @@ public class LoginAction  extends BaseAction {
 		String msg="";
 		JSONObject json = new JSONObject();
 		try {
-			  User user = new User();
-			  user.setId(id);
-			  user.setUserName(userName);
-			  user.setPassword(password);
-			  boolean result = loginService.insert(user);
-				if(result){
-			 			msg="注册成功！";
-			 			json.put("state", "0");
-				}else{
-					msg="注册失败！";
-					json.put("state", "1");
-				}	
+			/*********************** 用户插入 start  *************************/
+//			  User user = new User();
+//			  user.setId(id);
+//			  user.setUserName(userName);
+//			  user.setPassword(password);
+//			  boolean result = loginService.insert(user);
+//				if(result){
+//			 			msg="注册成功！";
+//			 			json.put("state", "0");
+//				}else{
+//					msg="注册失败！";
+//					json.put("state", "1");
+//				}	
+			/*********************** 用户批量插入 start  *************************/
+			List<User> list = new ArrayList<User>();
+			User user1 = new User();
+		    user1.setId("8");
+		    user1.setUserName("gaox6");
+		    user1.setPassword("888");
+		    list.add(user1);
+		    User user2 = new User();
+		    user2.setId("9");
+		    user2.setUserName("gaox7");
+		    user2.setPassword("888");
+		    list.add(user2);
+		    loginService.insertOfBatch(list);
+		    msg="批量插入成功";
+		    json.put("state","0");
+		    
+		    
 			json.put("msg", msg);
 			response.setContentType("application/json");  
 			response.setCharacterEncoding("UTF-8");
