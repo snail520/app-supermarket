@@ -3,5 +3,5 @@
 	<description>SpringBiz配置文件 </description>
 	
 	<!-- 对Biz层进行自动注入扫描 -->
-	<context:component-scan base-package="com.lezhi.demo.biz.service" />
+	<context:component-scan base-package="com.lezhi.supermarket.biz.service" />
 </beans>

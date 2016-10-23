@@ -2,7 +2,7 @@
   
 <configuration>
 	
-	<Property name="log.base" value="/Users/gaoxiang/Downloads/demo/web" />
+	<Property name="log.base" value="/Users/gaoxiang/Downloads/supermarket/web" />
 
 	<!-- 全局日志以控制台输出 -->
 	<!-- 此输出只应用于开发环境，生产环境务必注释掉，打开文件记录方式 -->
@@ -53,7 +53,7 @@
     </root>
     
     <!-- 将所有action的日志以文件夹的方式分别记录，只记录info级别以上的，而且日志不在主日志文件内记录 -->
-    <logger name="com.lezhi.demo.web.action" level="Info" additivity="false">
+    <logger name="com.lezhi.supermarket.web.action" level="Info" additivity="false">
     	<appender-ref ref="SIFT"/>
     	<!-- 当需要在生产环境下，进行Debug日志抓取，且需要在主日志文件下记录action自定义日志时，放开此项，并在抓取完毕后，再次注释 -->
 		<!-- 开发环境下，开放此项 -->

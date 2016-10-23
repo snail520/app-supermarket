@@ -26,12 +26,13 @@ function userLogin(){
 		});
 }
 function userRegister(){
+	var id = $("#id").val();
 	var userName = $("#userName").val();
 	var password = $("#password").val();
 	$.ajax({
 		   type: "POST",
 		   url: "${ctx}/userRegister",
-		   data: "userName="+userName+"&password="+password,
+		   data: "userName="+userName+"&password="+password+"&id="+id,
 		   dataType : "json",
 		   success: function(result){		
 		   if(result.state=='0'){

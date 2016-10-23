@@ -10,13 +10,12 @@
 	
 	<!-- 静态资源访问（不拦截此目录下的东西的访问） -->  
     <mvc:resources location="res/"  mapping="/res/**" />    
-    <mvc:resources location="downloadFile/"  mapping="/downloadFile//**" />    
     <!-- 对action层进行自动注入扫描 -->
-	<context:component-scan base-package="com.lezhi.demo.web.action" />
+	<context:component-scan base-package="com.lezhi.supermarket.web.action" />
 	
 	<!-- 配置日志拦截切入，此组件将截获所有Action请求的方法，并对返回结果进行包装，并对日志进行记录，避免到处写日志等 -->
-    <bean class="com.lezhi.demo.web.common.LogAspect" />
-    <bean class="com.lezhi.demo.web.common.MessageModel" scope="request">
+    <bean class="com.lezhi.supermarket.web.common.LogAspect" />
+    <bean class="com.lezhi.supermarket.web.common.MessageModel" scope="request">
 		<!-- 如果scope采用request或session时，以下aop标记是必须的，否则会报错无法注入 -->
 		<aop:scoped-proxy/> 
 	</bean>
