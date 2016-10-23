@@ -2,22 +2,18 @@ package com.lezhi.supermarket.biz.service.impl;
 
 import java.io.Serializable;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.lezhi.supermarket.biz.service.BaseService;
+import com.lezhi.supermarket.dao.service.BaseDao;
 
 
-public abstract class BaseServiceImpl<T,ID extends Serializable> implements BaseService<T, Serializable> {
+public abstract class BaseServiceImpl<T,PK extends Serializable> implements BaseService<T,PK> {
+	@Autowired
+	private BaseDao<T,PK> baseDao;
+	
     @Override
 	public boolean insert(T obj) throws Exception {
-		return false;
-    }
-    
-    @Override
-    public boolean update(T obj) throws Exception {
-    	return false;
-    }
-    
-    @Override
-    public boolean delete(Class<?> c, String id) throws Exception {
-    	return false;
+		return baseDao.insert(obj);
     }
 }

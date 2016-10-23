@@ -10,7 +10,6 @@
 </typeAliases>
 	<mappers>
 	    <mapper resource="com/lezhi/supermarket/dao/mapper/maps/BaseMapper.xml" />
-		<mapper resource="com/lezhi/supermarket/dao/mapper/maps/UserMapper.xml" />
 	</mappers>
 </configuration>
 	  

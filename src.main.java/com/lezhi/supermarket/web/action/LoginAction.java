@@ -28,7 +28,7 @@ public class LoginAction  extends BaseAction {
 		String msg="";
 		JSONObject json = new JSONObject();
 		try {
-				User user = loginService.findUser(userName);
+				User user = null;
 				if(null != user){
 					 if(password.equals(user.getPassword())){
 			 			msg="登录成功！";
@@ -88,7 +88,7 @@ public class LoginAction  extends BaseAction {
 		String msg="";
 		JSONObject json = new JSONObject();
 		try {
-			  boolean result = loginService.deleteUser(id);
+			  boolean result = false;
 				if(result){
 			 			msg="删除成功！";
 			 			json.put("state", "0");

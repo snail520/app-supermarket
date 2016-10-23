@@ -1,29 +1,35 @@
 package com.lezhi.supermarket.dao.service.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.lang.reflect.Field;
 
 import org.apache.commons.lang.StringUtils;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.lezhi.supermarket.dao.service.BaseDao;
+import com.lezhi.supermarket.model.util.AssConstant;
 import com.lezhi.supermarket.model.util.GenericsUtils;
 import com.lezhi.supermarket.model.util.Ignore;
 import com.lezhi.supermarket.model.util.PrimaryKey;
+import com.lezhi.supermarket.model.util.ReflectionUtils;
 import com.lezhi.supermarket.model.util.SQLGenerator;
 import com.lezhi.supermarket.model.util.Table;
 import com.lezhi.supermarket.model.util.TableColumn;
 
-public abstract class BaseDaoImpl<T,ID extends Serializable> implements BaseDao<T,ID>{
+@Repository("BaseDao")
+public abstract class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<T,PK>{
 	
 	@Autowired
 	SqlSessionTemplate sqlTemplate;
 	
-	private String basePackage = "com.lezhi.demo.dao.mapper.";
+	private String basePackage = "com.lezhi.supermarket.dao.mapper.";
 	private Class<T> entityClass;
 	/**
      * 作cache 结构{T类的镜像,{数据库列名,实体字段名}}
@@ -79,28 +85,74 @@ public abstract class BaseDaoImpl<T,ID extends Serializable> implements BaseDao<
         tableName = table.value();
         sqlGenerator = new SQLGenerator<T>(currentColumnFieldNames.keySet(),tableName,pkName,seq);
 	}
+	
+	@Override
 	public boolean insert(T obj) {
 		int res = sqlTemplate.insert("insert",sqlGenerator.sql_create(obj, currentColumnFieldNames));
 		return returnResult(res);
 	}
 	
+	@Override
+	public void insertOfBatch(List<T> list) {
+		if(null == list || list.isEmpty()){
+            return;
+        }
+        List<T> temp = new ArrayList<T>();
+        //获取列表的第一个对象的pk的value
+        Object pkVal = null;
+        for (int i=0; i < list.size(); i++) {
+            T t = list.get(i);
+            if(i==0){
+                pkVal = ReflectionUtils.invokeGetterMethod(t, idName);
+            }
+            temp.add(t);
+            if (i > 0 && i % AssConstant.FLUSH_CRITICAL_VAL == 0) {
+                sqlTemplate.insert("createOfBatch", sqlGenerator
+                        .sql_createOfBatch(temp, currentColumnFieldNames,pkVal));
+                sqlTemplate.flushStatements();
+                temp = new ArrayList<T>();
+            }
+        }
+        sqlTemplate.insert("createOfBatch", sqlGenerator.sql_createOfBatch(temp, currentColumnFieldNames,pkVal));
+	}
+
+	
+	@Override
 	public boolean update(T obj) {
-		String entityName = obj.getClass().getSimpleName();
-		int res = sqlTemplate.update(basePackage + entityName + "Mapper.update",obj);
-		return returnResult(res);
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
-	public boolean delete(Class<?> c,String id) {
-		String entityName = c.getSimpleName();
-		int res = sqlTemplate.update(basePackage + entityName + "Mapper.delete",id);
-		return returnResult(res);
+
+	@Override
+	public boolean deleteById(PK id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
-	public T findById(Class<?> c,String id) {
-		String entityName = c.getSimpleName();
-		return sqlTemplate.selectOne(basePackage + entityName + "Mapper.findById",id);
+
+	@Override
+	public void deleteOfBatch(List<PK> ids) {
+		// TODO Auto-generated method stub
+		
 	}
-	
+
+	@Override
+	public T findById(PK id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<T> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Long findAllCount() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public boolean returnResult(int result){
 		if(result>0){
 			return true;
