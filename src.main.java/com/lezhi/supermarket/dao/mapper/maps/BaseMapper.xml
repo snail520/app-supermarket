@@ -9,4 +9,7 @@
 	<insert id="insertOfBatch">
         ${value}
      </insert>
+     <delete id="deleteById">
+        ${value}
+    </delete>
  </mapper>

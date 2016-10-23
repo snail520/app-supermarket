@@ -9,5 +9,5 @@ public interface BaseService<T,PK extends Serializable>{
 	
 	public void insertOfBatch(List<T> list) throws Exception;
 	
-	
+	public boolean deleteById(PK id);
 }

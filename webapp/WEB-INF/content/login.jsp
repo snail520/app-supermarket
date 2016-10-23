@@ -36,9 +36,9 @@ function userRegister(){
 		   dataType : "json",
 		   success: function(result){		
 		   if(result.state=='0'){
-		     	alert("注册成功");
+		     	alert(result.msg);
 			}else{
-				alert("注册失败");
+				alert(result.msg);
 			}
 		   }
 		});

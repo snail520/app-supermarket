@@ -22,4 +22,9 @@ public abstract class BaseServiceImpl<T,PK extends Serializable> implements Base
 	public void insertOfBatch(List<T> list) throws Exception {
 		baseDao.insertOfBatch(list);
 	}
+
+	@Override
+	public boolean deleteById(PK id) {
+		return baseDao.deleteById(id);
+	}
 }

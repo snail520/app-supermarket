@@ -115,16 +115,15 @@ public abstract class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<
         }
         sqlTemplate.insert("insertOfBatch", sqlGenerator.sql_createOfBatch(temp, currentColumnFieldNames,pkVal));
 	}
-
+	
+	@Override
+	public boolean deleteById(PK id) {
+		int res = sqlTemplate.delete("deleteById",sqlGenerator.sql_removeById(id));
+		return returnResult(res);
+	}
 	
 	@Override
 	public boolean update(T obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteById(PK id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
