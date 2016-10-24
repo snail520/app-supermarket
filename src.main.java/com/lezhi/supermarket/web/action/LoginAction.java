@@ -90,14 +90,28 @@ public class LoginAction  extends BaseAction {
 //		    msg="批量插入成功";
 //		    json.put("state","0")
 			/*********************** 根据主键删除 start  *************************/
-			boolean res = loginService.deleteById("9");
-			if(res){
-				msg="删除成功！";
-	 			json.put("state", "0");
-			}else{
-				msg="删除失败！";
-	 			json.put("state", "1");
-			}
+//			boolean res = loginService.deleteById("9");
+//			if(res){
+//				msg="删除成功！";
+//	 			json.put("state", "0");
+//			}else{
+//				msg="删除失败！";
+//	 			json.put("state", "1");
+//			}
+			/************************ 根据主键更新 start ****************************/
+//			User user2 = new User();
+//		    user2.setId("8");
+//		    user2.setUserName("gaox7");
+//		    user2.setPassword("888");
+//		    boolean res = loginService.update(user2);
+//		    if(res){
+//				msg="更新成功！";
+//	 			json.put("state", "0");
+//			}else{
+//				msg="更新失败！";
+//	 			json.put("state", "1");
+//			}
+			
 			json.put("msg", msg);
 			response.setContentType("application/json");  
 			response.setCharacterEncoding("UTF-8");

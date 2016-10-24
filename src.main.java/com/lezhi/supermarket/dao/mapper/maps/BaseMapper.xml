@@ -12,4 +12,7 @@
      <delete id="deleteById">
         ${value}
     </delete>
+    <update id="update">
+        ${value}
+    </update>
  </mapper>

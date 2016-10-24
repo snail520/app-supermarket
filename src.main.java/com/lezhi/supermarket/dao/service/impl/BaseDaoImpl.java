@@ -124,8 +124,8 @@ public abstract class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<
 	
 	@Override
 	public boolean update(T obj) {
-		// TODO Auto-generated method stub
-		return false;
+		int res = sqlTemplate.update("update",sqlGenerator.sql_modify(obj,currentColumnFieldNames));
+		return returnResult(res);
 	}
 
 	@Override

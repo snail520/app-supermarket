@@ -27,4 +27,9 @@ public abstract class BaseServiceImpl<T,PK extends Serializable> implements Base
 	public boolean deleteById(PK id) {
 		return baseDao.deleteById(id);
 	}
+
+	@Override
+	public boolean update(T t) throws Exception {
+		return baseDao.update(t);
+	}
 }
