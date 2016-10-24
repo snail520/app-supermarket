@@ -15,4 +15,7 @@
     <update id="update">
         ${value}
     </update>
+    <select id="findById" resultType="hashmap">
+        ${value}
+    </select>
  </mapper>

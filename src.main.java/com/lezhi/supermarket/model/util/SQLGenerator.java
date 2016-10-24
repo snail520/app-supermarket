@@ -273,7 +273,7 @@ public class SQLGenerator<T> {
         StringBuilder sql_build = new StringBuilder();
         sql_build.append("SELECT ").append(columnsStr).append(" FROM ")
                 .append(this.tableName)
-                .append(" WHERE ROWNUM = 1 AND " + pkName + " = " + id);
+                .append(" WHERE " + pkName + " = " + id);
         
         String sql = sql_build.toString();
         

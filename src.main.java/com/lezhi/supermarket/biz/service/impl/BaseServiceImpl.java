@@ -32,4 +32,9 @@ public abstract class BaseServiceImpl<T,PK extends Serializable> implements Base
 	public boolean update(T t) throws Exception {
 		return baseDao.update(t);
 	}
+
+	@Override
+	public T findById(PK id) {
+		return baseDao.findById(id);
+	}
 }

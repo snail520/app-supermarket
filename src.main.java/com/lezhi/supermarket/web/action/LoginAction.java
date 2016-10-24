@@ -111,6 +111,9 @@ public class LoginAction  extends BaseAction {
 //				msg="更新失败！";
 //	 			json.put("state", "1");
 //			}
+			/************************ 根据ID查询实体 start **************************/
+//			User user = loginService.findById("8");
+			
 			
 			json.put("msg", msg);
 			response.setContentType("application/json");  

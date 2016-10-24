@@ -10,6 +10,8 @@ import java.lang.reflect.Field;
 
 import org.apache.commons.lang.StringUtils;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +30,7 @@ public abstract class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<
 	
 	@Autowired
 	SqlSessionTemplate sqlTemplate;
-	
+	protected Logger    logger    = LoggerFactory.getLogger(this.getClass());
 	private String basePackage = "com.lezhi.supermarket.dao.mapper.";
 	private Class<T> entityClass;
 	/**
@@ -129,15 +131,15 @@ public abstract class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<
 	}
 
 	@Override
+	public T findById(PK id) {
+		Map<String, Object> resultMap = sqlTemplate.selectOne("findById", sqlGenerator.sql_findOneById(id));
+        return handleResult(resultMap, this.entityClass);
+	}
+	
+	@Override
 	public void deleteOfBatch(List<PK> ids) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public T findById(PK id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -159,4 +161,27 @@ public abstract class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<
 			return false;
 		}
 	}
+	private T handleResult(Map<String, Object> resultMap, Class<T> tClazz) {
+        T t = null;
+        try {
+            t = tClazz.newInstance();
+        } catch (InstantiationException e) {
+            logger.error("/********************************");
+            logger.error("封装查询结果时，实例化对象(" + this.entityClass + ")时，出现异常!"
+                    + e.getMessage());
+            logger.error("/********************************");
+        } catch (IllegalAccessException e) {
+            logger.error("/********************************");
+            logger.error("封装查询结果时，实例化对象(" + this.entityClass + ")时，出现异常!"
+                    + e.getMessage());
+            logger.error("/********************************");
+        }
+        for (Map.Entry<String, Object> entry : resultMap.entrySet()) {
+            String key = entry.getKey();
+            key = currentColumnFieldNames.get(key);
+            Object val = entry.getValue();
+            ReflectionUtils.invokeSetterMethod(t, key, val);
+        }
+        return t;
+    }
 }
