@@ -42,4 +42,9 @@ public abstract class BaseServiceImpl<T,PK extends Serializable> implements Base
 	public List<T> findAll() throws Exception {
 		return baseDao.findAll();
 	}
+
+	@Override
+	public Long findAllCount() throws Exception {
+		return baseDao.findAllCount();
+	}
 }

@@ -16,4 +16,6 @@ public interface BaseService<T,PK extends Serializable>{
 	public T findById(PK id);
 	
 	public List<T> findAll() throws Exception;
+	
+	public Long findAllCount() throws Exception;
 }

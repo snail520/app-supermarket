@@ -21,4 +21,7 @@
     <select id="findAll" resultType="hashmap">
         ${value}
     </select>
+    <select id="findAllCount" resultType="Long">
+        ${value}
+    </select>
  </mapper>

@@ -115,7 +115,8 @@ public class LoginAction  extends BaseAction {
 //			User user = loginService.findById("8");
 			/************************ 获取表所有对象 start **************************/
 //			List<User> list = loginService.findAll();
-			
+			/************************ 查询表总数量 start ***************************/
+			Long num = loginService.findAllCount();
 			json.put("msg", msg);
 			response.setContentType("application/json");  
 			response.setCharacterEncoding("UTF-8");

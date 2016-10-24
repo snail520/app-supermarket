@@ -148,15 +148,15 @@ public abstract class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<
 	}
 	
 	@Override
+	public Long findAllCount() {
+		Long count = sqlTemplate.selectOne("findAllCount", sqlGenerator.sql_findAllCount());
+        return count;
+	}
+	
+	@Override
 	public void deleteOfBatch(List<PK> ids) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public Long findAllCount() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public boolean returnResult(int result){
