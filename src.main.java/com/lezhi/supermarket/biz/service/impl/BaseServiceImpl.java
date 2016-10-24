@@ -37,4 +37,9 @@ public abstract class BaseServiceImpl<T,PK extends Serializable> implements Base
 	public T findById(PK id) {
 		return baseDao.findById(id);
 	}
+
+	@Override
+	public List<T> findAll() throws Exception {
+		return baseDao.findAll();
+	}
 }

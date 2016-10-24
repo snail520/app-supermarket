@@ -14,4 +14,6 @@ public interface BaseService<T,PK extends Serializable>{
 	public boolean update(T t) throws Exception;
 	
 	public T findById(PK id);
+	
+	public List<T> findAll() throws Exception;
 }

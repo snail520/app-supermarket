@@ -137,15 +137,20 @@ public abstract class BaseDaoImpl<T,PK extends Serializable> implements BaseDao<
 	}
 	
 	@Override
+	public List<T> findAll() {
+		List<Map<String, Object>> resultMapList = sqlTemplate.selectList("findAll", sqlGenerator.sql_findAll());
+        List<T> tList = new ArrayList<T>(resultMapList.size());
+        for (Map<String, Object> resultMap : resultMapList) {
+            T t = handleResult(resultMap, this.entityClass);
+            tList.add(t);
+        }
+        return tList;
+	}
+	
+	@Override
 	public void deleteOfBatch(List<PK> ids) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public List<T> findAll() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
